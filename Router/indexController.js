@@ -6,7 +6,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.send('here is page of index.');
+    res.json({ info: 'here is page of index!' });
 });
 
 module.exports = router;

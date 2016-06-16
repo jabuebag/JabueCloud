@@ -20,7 +20,6 @@ exports.addUser = function () {
 }
 
 exports.test = function () {
-    //var mongoDb = mongoManager.getDBConnection();
     mongoDb.collection('restaurants').insertOne({
         "address": {
             "street": "2 Avenue",
