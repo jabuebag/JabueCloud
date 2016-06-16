@@ -4,8 +4,8 @@ var systemConfig = require('./Config/system');
 var mongoConfig = require('./Config/mongoConfig');
 
 // path router
-var indexRouter = require('./Router/indexRouter');
-var userRouter = require('./Router/userRouter');
+var indexRouter = require('./Router/indexController');
+var userRouter = require('./Router/userController');
 
 // App
 var app = express();
