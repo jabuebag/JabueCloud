@@ -2,7 +2,6 @@ var express = require('express');
 var assert = require('assert');
 
 var systemConfig = require('./Config/system');
-var mongoConfig = require('./Config/mongocg');
 var mongoManager = require('./Manager/dbManager');
 var userService = require('./Service/userService');
 
