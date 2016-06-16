@@ -3,7 +3,7 @@
  */
 // mongo db
 var MongoClient = require('mongodb').MongoClient;
-var mongoConfig = require('../Config/mongocg');
+var mongoConfig = require('../Config/mongoConfig');
 
 var exports = module.exports = {};
 

@@ -1,9 +1,26 @@
 /**
  * Created by jabue on 16-06-15.
  */
+var mongoManager = require('../Manager/dbManager');
+var User = require('../Model/userModel');
+
 var exports = module.exports = {};
 
-exports.addUser = function(mongoDb) {
+exports.addUser = function () {
+    var user = new User({
+        name: 'jabue',
+        password: 'jabue',
+        admin: true
+    });
+
+    user.save(function(err) {
+        if (err) throw err;
+        console.log('User saved successfully');
+    });
+}
+
+exports.test = function () {
+    //var mongoDb = mongoManager.getDBConnection();
     mongoDb.collection('restaurants').insertOne({
         "address": {
             "street": "2 Avenue",

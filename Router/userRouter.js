@@ -2,7 +2,6 @@
  * Created by jabue on 16-06-15.
  */
 var express = require('express');
-var mongoManager = require('../Manager/dbManager');
 var userService = require('../Service/userService');
 
 var router = express.Router();
@@ -13,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/new/', function(req, res, next) {
-    userService.addUser(mongoManager.getDBConnection());
+    userService.addUser();
     res.send('here is new page of users.');
 });
 
