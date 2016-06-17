@@ -1,8 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser  = require('body-parser');
+var jwt = require('jsonwebtoken');
 var systemConfig = require('./Config/SystemConfig');
 var mongoConfig = require('./Config/MongoConfig');
+var authMiddleware = require('./Utility/AuthUtility');
 
 // path router
 var indexController = require('./Controller/IndexController');
@@ -11,6 +13,7 @@ var authController = require('./Controller/AuthController');
 
 // App
 var app = express();
+var router = express.Router();
 
 // connect mongo db
 mongoose.connect(mongoConfig.mongoUrl);
@@ -19,7 +22,10 @@ mongoose.connect(mongoConfig.mongoUrl);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// route to different routers due to path
+//authMiddleware
+authMiddleware.authMiddleware(app, router);
+
+// route to different controllers due to path
 app.use('/', indexController);
 app.use('/user', userController);
 app.use('/auth', authController);

@@ -8,17 +8,17 @@ var userService = require('../Service/UserService');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.json({ info: 'here is page of user!' });
+router.get('/', function (req, res, next) {
+    res.json({info: 'here is page of user!'});
 });
 
-router.get('/new', function(req, res, next) {
+router.get('/new', function (req, res, next) {
     userService.addUser();
-    res.json({ info: 'add user successfully!' });
+    res.json({info: 'add user successfully!'});
 });
 
-router.get('/users', function(req, res, next) {
-    User.find({}, function(err, users) {
+router.get('/users', function (req, res, next) {
+    User.find({}, function (err, users) {
         res.json(users);
     });
 });
