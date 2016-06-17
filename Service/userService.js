@@ -1,8 +1,8 @@
 /**
  * Created by jabue on 16-06-15.
  */
-var mongoManager = require('../Manager/dbManager');
-var User = require('../Model/userModel');
+var mongoManager = require('../Manager/DBManager');
+var User = require('../Model/UserModel');
 
 var exports = module.exports = {};
 
