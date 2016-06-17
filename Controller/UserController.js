@@ -2,8 +2,8 @@
  * Created by jabue on 16-06-15.
  */
 var express = require('express');
-var User = require('../Model/userModel');
-var userService = require('../Service/userService');
+var User = require('../Model/UserModel');
+var userService = require('../Service/UserService');
 
 var router = express.Router();
 
