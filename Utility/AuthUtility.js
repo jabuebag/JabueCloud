@@ -1,6 +1,9 @@
 /**
  * Created by jabue on 16-06-17.
  */
+var jwt = require('jsonwebtoken');
+var systemConfig = require('../Config/SystemConfig');
+
 var exports = module.exports = {};
 
 exports.authMiddleware = function (app, router) {

@@ -9,12 +9,12 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    res.json({info: 'here is page of user!'});
+    res.json({success: 'true', message: 'here is page of user!'});
 });
 
 router.get('/new', function (req, res, next) {
     userService.addUser();
-    res.json({info: 'add user successfully!'});
+    res.json({success: 'true', message: 'add user successfully!'});
 });
 
 router.get('/users', function (req, res, next) {

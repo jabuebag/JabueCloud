@@ -5,8 +5,8 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.json({ info: 'here is page of index!' });
+router.get('/', function (req, res, next) {
+    res.json({success: 'true', message: 'here is page of index!'});
 });
 
 module.exports = router;
