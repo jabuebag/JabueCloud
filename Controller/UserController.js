@@ -23,4 +23,8 @@ router.get('/users', function (req, res, next) {
     });
 });
 
+router.get('/test', function (req, res, next) {
+    res.json({success: 'true', message: 'here is test auth page!'});
+});
+
 module.exports = router;
