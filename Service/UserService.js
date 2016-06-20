@@ -1,14 +1,19 @@
 /**
  * Created by jabue on 16-06-15.
  */
+var passwordHash = require('password-hash');
 var User = require('../Model/UserModel');
 
 var exports = module.exports = {};
 
 exports.addUser = function () {
+    // used for test
+    var hashedPassword = passwordHash.generate('jabue');
+
     var user = new User({
         name: 'jabue',
-        password: 'jabue',
+        password: hashedPassword,
+        email: 'ybagyang@gmail.com',
         admin: true
     });
 
