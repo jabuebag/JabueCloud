@@ -27,5 +27,5 @@ exports.authMiddleware = function (app, router) {
             });
         }
     });
-    app.use('/user/new', router);
+    app.use('/user/test', router);
 }
