@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var jwt = require('jsonwebtoken');
+var passwordHash = require('password-hash');
 var systemConfig = require('../Config/SystemConfig');
 var User = require('../Model/UserModel');
 
@@ -16,7 +17,7 @@ router.post('/', function(req, res) {
         if (!user) {
             res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
-            if (user.password != req.body.password) {
+            if (!passwordHash.verify(req.body.password, user.password)) {
                 res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
                 var token = jwt.sign(user, systemConfig.tokenSecret);
