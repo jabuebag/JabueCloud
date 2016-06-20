@@ -11,15 +11,23 @@ exports.addUser = function () {
     var hashedPassword = passwordHash.generate('jabue');
 
     var user = new User({
-        name: 'jabue',
+        username: 'jabue',
         password: hashedPassword,
         email: 'ybagyang@gmail.com',
         admin: true
     });
 
-    user.save(function(err) {
+    user.save(function (err) {
         if (err) throw err;
         console.log('User saved successfully');
+    });
+}
+
+exports.isUserExist = function (email) {
+    return User.find({
+        email: email
+    }, function (err, user) {
+        if (err) throw err;
     });
 }
 

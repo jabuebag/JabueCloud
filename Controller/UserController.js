@@ -13,8 +13,17 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/new', function (req, res, next) {
-    userService.addUser();
-    res.json({success: 'true', message: 'add user successfully!'});
+    User.find({
+        email: "ybagyang@gmail.com"
+    }, function (err, user) {
+        if (err) throw err;
+        if (user.length > 0 ) {
+            res.json({success: 'false', message: 'user already exist!'});
+        } else {
+            userService.addUser();
+            res.json({success: 'true', message: 'add user successfully!'});
+        }
+    });
 });
 
 router.get('/users', function (req, res, next) {

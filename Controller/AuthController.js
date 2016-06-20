@@ -11,7 +11,7 @@ var router = express.Router();
 
 router.post('/', function(req, res) {
     User.findOne({
-        name: req.body.name
+        username: req.body.username
     }, function(err, user) {
         if (err) throw err;
         if (!user) {
