@@ -12,15 +12,15 @@ router.get('/', function (req, res, next) {
     res.json({success: 'true', message: 'here is page of user!'});
 });
 
-router.get('/new', function (req, res, next) {
+router.post('/new', function (req, res, next) {
     User.find({
-        email: "ybagyang@gmail.com"
+        email: req.body.email
     }, function (err, user) {
         if (err) throw err;
         if (user.length > 0 ) {
             res.json({success: 'false', message: 'user already exist!'});
         } else {
-            userService.addUser();
+            userService.addUser(req.body);
             res.json({success: 'true', message: 'add user successfully!'});
         }
     });
