@@ -38,7 +38,7 @@ router.get('/', function (req, res, next) {
         APIS: [
             {
                 api: '/auth/auth',
-                describe: 'Authenticate users.',
+                describe: 'Authenticate users. Generate token for user.',
                 method: 'post',
                 parameters: 'email:requird, password:required',
                 token: 'not required'

@@ -7,7 +7,7 @@ var userService = require('../Service/UserService');
 
 var router = express.Router();
 
-router.post('/new', function (req, res, next) {
+router.post('/register', function (req, res, next) {
     User.find({
         email: req.body.email
     }, function (err, user) {
@@ -36,7 +36,7 @@ router.get('/', function (req, res, next) {
         title: 'User API Instructions',
         APIS: [
             {
-                api: '/user/new',
+                api: '/user/register',
                 describe: 'Create new users.',
                 method: 'post',
                 parameters: 'email:requird, username:required, password:required',
@@ -44,10 +44,10 @@ router.get('/', function (req, res, next) {
             },
             {
                 api: '/user/users',
-                describe: 'get all the users',
+                describe: 'Get all the users',
                 method: 'get',
                 parameters: 'null',
-                token: 'required'
+                token: 'Required, get token from /auth.'
             }
         ]
     });
