@@ -30,6 +30,7 @@ exports.authMiddleware = function (app, router) {
             });
         }
     });
+
     app.use('/user/users', router);
-    app.use('/user/test', router);
+    app.use('/user/info', router);
 }

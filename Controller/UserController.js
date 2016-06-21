@@ -27,19 +27,32 @@ router.post('/register', function (req, res, next) {
 });
 
 router.get('/users', function (req, res, next) {
-    User.find({}, function (err, users) {
+    userService.getAllUser(function (users) {
         res.json(users);
-    });
+    })
 });
 
 router.get('/info', function (req, res, next) {
-    User.find({}, function (err, users) {
-        res.json(users);
-    });
+    userService.getUserInfo(req.query.uid, function (user) {
+        if (user) {
+            res.json({
+                success: 'true',
+                message: 'user information.',
+                uid: user._id,
+                username: user.username,
+                email:user.email
+            });
+        } else {
+            res.json({
+                success: 'false',
+                message: 'user of this id is not exist.'
+            });
+        }
+    })
 });
 
 router.get('/test', function (req, res, next) {
-    res.json({success: 'true', message: 'here is test auth page!'});
+    res.json({success: 'true', message: req.query.test});
 });
 
 router.get('/', function (req, res, next) {
@@ -58,6 +71,13 @@ router.get('/', function (req, res, next) {
                 describe: 'Get all the users',
                 method: 'get',
                 parameters: 'null',
+                token: 'Required, get token from /auth.'
+            },
+            {
+                api: '/user/info',
+                describe: 'Get one user information.',
+                method: 'get',
+                parameters: 'uid:required',
                 token: 'Required, get token from /auth.'
             }
         ]
