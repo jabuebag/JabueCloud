@@ -7,11 +7,6 @@ var userService = require('../Service/UserService');
 
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.json({success: 'true', message: 'here is page of user!'});
-});
-
 router.post('/new', function (req, res, next) {
     User.find({
         email: req.body.email
@@ -34,6 +29,28 @@ router.get('/users', function (req, res, next) {
 
 router.get('/test', function (req, res, next) {
     res.json({success: 'true', message: 'here is test auth page!'});
+});
+
+router.get('/', function (req, res, next) {
+    res.json({
+        title: 'User API Instructions',
+        APIS: [
+            {
+                api: '/user/new',
+                describe: 'Create new users.',
+                method: 'post',
+                parameters: 'email:requird, username:required, password:required',
+                token: 'not required'
+            },
+            {
+                api: '/user/users',
+                describe: 'get all the users',
+                method: 'get',
+                parameters: 'null',
+                token: 'required'
+            }
+        ]
+    });
 });
 
 module.exports = router;

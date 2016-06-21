@@ -9,9 +9,9 @@ var User = require('../Model/UserModel');
 
 var router = express.Router();
 
-router.post('/', function(req, res) {
+router.post('/auth', function(req, res) {
     User.findOne({
-        username: req.body.username
+        email: req.body.email
     }, function(err, user) {
         if (err) throw err;
         if (!user) {
@@ -29,6 +29,21 @@ router.post('/', function(req, res) {
                 });
             }
         }
+    });
+});
+
+router.get('/', function (req, res, next) {
+    res.json({
+        title: 'Authentication API Instructions',
+        APIS: [
+            {
+                api: '/auth/auth',
+                describe: 'Authenticate users.',
+                method: 'post',
+                parameters: 'email:requird, password:required',
+                token: 'not required'
+            }
+        ]
     });
 });
 
