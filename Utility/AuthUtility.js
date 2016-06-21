@@ -14,7 +14,10 @@ exports.authMiddleware = function (app, router) {
         if (token) {
             jwt.verify(token, systemConfig.tokenSecret, function (err, decoded) {
                 if (err) {
-                    return res.json({success: false, message: 'Failed to authenticate token.'});
+                    return res.json({
+                        success: false,
+                        message: 'Failed to authenticate token.'
+                    });
                 } else {
                     req.decoded = decoded;
                     next();

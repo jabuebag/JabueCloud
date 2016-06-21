@@ -6,16 +6,30 @@ var User = require('../Model/UserModel');
 
 var exports = module.exports = {};
 
-exports.addUser = function (body) {
+exports.addUser = function (body, callback) {
     var user = new User({
         username: body.username,
         password: passwordHash.generate(body.password),
-        email: body.email?body.email:'',
+        email: body.email ? body.email : '',
         admin: true
     });
 
-    user.save(function (err) {
+    user.save(function (err, user) {
         if (err) throw err;
         console.log('User saved successfully');
+        return callback(user);
+    });
+}
+
+exports.isExist = function (email, callback) {
+    User.find({
+        email: email
+    }, function (err, user) {
+        if (err) throw err;
+        if (user.length > 0) {
+            callback(true);
+        } else {
+            callback(false);
+        }
     });
 }

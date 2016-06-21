@@ -2,34 +2,25 @@
  * Created by jabue on 16-06-16.
  */
 var express = require('express');
-var jwt = require('jsonwebtoken');
-var passwordHash = require('password-hash');
-var systemConfig = require('../Config/SystemConfig');
-var User = require('../Model/UserModel');
+var authService = require('../Service/AuthService');
 
 var router = express.Router();
 
-router.post('/auth', function(req, res) {
-    User.findOne({
-        email: req.body.email
-    }, function(err, user) {
-        if (err) throw err;
-        if (!user) {
-            res.json({ success: false, message: 'Authentication failed. User not found.' });
-        } else if (user) {
-            if (!passwordHash.verify(req.body.password, user.password)) {
-                res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-            } else {
-                var token = jwt.sign(user, systemConfig.tokenSecret);
-
-                res.json({
-                    success: true,
-                    message: 'Enjoy your token!',
-                    token: token
-                });
-            }
+router.post('/auth', function (req, res) {
+    authService.authUser(req.body.email, req.body.password, function(success, token) {
+        if (success) {
+            res.json({
+                success: true,
+                message: 'Enjoy your token!',
+                token: token
+            });
+        } else {
+            res.json({
+                success: false,
+                message: 'Authentication failed.'
+            });
         }
-    });
+    })
 });
 
 router.get('/', function (req, res, next) {
