@@ -33,3 +33,16 @@ exports.isExist = function (email, callback) {
         }
     });
 }
+
+exports.getAllUser = function (callback) {
+    User.find({}, function (err, users) {
+        callback(users);
+    });
+}
+
+exports.getUserInfo = function (uid, callback) {
+    User.findById(uid, function (err, user) {
+        if (err) throw err;
+        callback(user);
+    });
+}
