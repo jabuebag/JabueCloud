@@ -8,20 +8,31 @@ var userService = require('../Service/UserService');
 var router = express.Router();
 
 router.post('/register', function (req, res, next) {
-    User.find({
-        email: req.body.email
-    }, function (err, user) {
-        if (err) throw err;
-        if (user.length > 0 ) {
-            res.json({success: 'false', message: 'user already exist!'});
+    userService.isExist(req.body.email, function (exist) {
+        if (exist) {
+            res.json({
+                success: 'false',
+                message: 'user already exist!'
+            });
         } else {
-            userService.addUser(req.body);
-            res.json({success: 'true', message: 'add user successfully!'});
+            userService.addUser(req.body, function (user) {
+                res.json({
+                    success: 'true',
+                    message: 'add user successfully!',
+                    uid: user._id
+                });
+            });
         }
-    });
+    })
 });
 
 router.get('/users', function (req, res, next) {
+    User.find({}, function (err, users) {
+        res.json(users);
+    });
+});
+
+router.get('/info', function (req, res, next) {
     User.find({}, function (err, users) {
         res.json(users);
     });
